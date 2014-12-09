@@ -1,0 +1,15 @@
+{
+  "name": "FriendAlongAPI",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "jade": "*",
+	"mongoose": "^3.8.20",
+	"passport": "^0.2.1",
+	"passport-local": "^1.0.0"
+  }
+}
