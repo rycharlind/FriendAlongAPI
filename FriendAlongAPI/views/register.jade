@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	form.form(action="signup",method="post")
+		.row
+			+inputSection('username','text')
+			+inputSection('password','password')
+			+inputSection('firstName','text')
+			+inputSection('lastName','text')
+			+inputSection('email','text')
+		.row
+			.col-md-12
+				input.btn.btn-primary(type="submit", value="submit")
+
+mixin inputSection(name,type)
+	.col-md-3
+		span=name
+		input.form-control(name=name,type=type)
