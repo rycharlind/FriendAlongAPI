@@ -1,4 +1,46 @@
 extends layout
 
 block content
-	p Home Page
+	div.row
+		div.col-md-9
+			div.row
+				+eventBlock(' Event Title', 'fa-futbol-o')
+				+eventBlock(' Event Title', 'fa-film')
+				+eventBlock(' Event Title', 'fa-music')
+				+eventBlock(' Event Title', 'fa-music')
+				+eventBlock(' Event Title', 'fa-music')
+				+eventBlock(' Event Title', 'fa-music')
+				+eventBlock(' Event Title', 'fa-music')
+				+eventBlock(' Event Title', 'fa-music')
+				+eventBlock(' Event Title', 'fa-music')
+			
+			
+mixin eventBlock(name, icon)
+	div.col-md-6
+		div.panel.panel-success
+			div.panel-heading
+				i.fa(class=icon)
+				span=name
+			div.panel-body
+				div.row.pull-right.panel-user
+					div.col-md-12
+						img(style='margin-bottom:5px;border-radius:10px',src='http://k3.okccdn.com/php/load_okc_image.php/images/60x60/60x60/0x0/0x0/2/8195838067050674575.webp?v=2')
+				div.panel-event-place
+					p 
+						strong Place Name
+				div.panel-event-date 
+					p Saturday, December 8, 2014
+				div.panel-event-time
+					p 2:00 PM - 6:00 PM
+				div.panel-event-desc
+					small This will be the description of the event that a user posted.  I am going to write a bunch of text to fill up a couple sentenses.
+				div.panel-actions(style='margin-top:10px')
+					button.btn.btn-warning 
+						i.fa.fa-sign-in
+						span  Sign Up
+			div.panel-footer
+				button.btn.btn-info.btn-xs(style='margin:2px')
+					i.fa.fa-twitter
+				button.btn.btn-primary.btn-xs(style='margin:2px')
+					i.fa.fa-facebook
+			

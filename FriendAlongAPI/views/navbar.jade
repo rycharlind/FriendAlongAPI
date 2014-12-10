@@ -10,11 +10,43 @@ nav.navbar.navbar-default(role='navigation')
 				i.fa.fa-slideshare.fa-lg
 		div.collapse.navbar-collapse#bs-example-navbar-collapse-1
 			form.navbar-form.navbar-left(role='search')
-				input.form-control(type='text', placeholder='Search')
+				input.form-control(type='search', placeholder='Search People, Location, Places, Events', style='width:300px')
+			ul.nav.navbar-nav.navbar-left
+				li.dropdown
+					a.dropdown-toggle(href='#',data-toggle='dropdown', role='button', aria-expanded='false') Sports
+					ul.dropdown-menu(role='menu')
+						li
+							a(href='#') Basketball
+						li
+							a(href='#') Football
+						li
+							a(href='#') Baseball
+						li
+							a(href='#') Soccer
+						li
+							a(href='#') Golf
+				li
+					a(href='#') Entertainment
+				li
+					a(href='#') Nightlife
 			ul.nav.navbar-nav.navbar-right
 				li.dropdown
 					a.dropdown-toggle(data-toggle='dropdown', role='button') 
-						i.fa.fa-user.fa-lg
+						img#nav-prof-pic(src='https://avatars0.githubusercontent.com/u/396811?v=3&s=40', style='width:19px;height:19px')
+					ul.dropdown-menu(role='menu')
+						li
+							a(href='#') 
+								i.fa.fa-user
+								span  Profile
+						li
+							a(href='#')
+								i.fa.fa-cog
+								span  Settings
+						li.divider
+						li
+							a(href='#') 
+								i.fa.fa-sign-out
+								span  Logout
 				li
 					a
 						i.fa.fa-home.fa-lg
