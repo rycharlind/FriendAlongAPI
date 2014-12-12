@@ -1,10 +1,9 @@
-var express = require('express');
-var router = express.Router();
+exports.addRoutes = function(app) {
+	app.get('/signup', function(request, response) {
+		response.render('register', {});
+	});
 
-router.get('/signup', function(request, response) {
-	response.render('register', {});
-});
-
-router.get('/hello', function(request, response) {
-	response.send("hi");
-});
+	app.get('/users/hello', function(request, response) {
+		response.send("hi");
+	});
+}

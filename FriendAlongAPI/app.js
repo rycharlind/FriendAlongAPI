@@ -1,4 +1,4 @@
-var express = require('express'), routes = require('./routes'), user = require('./routes/user'), http = require('http'), path = require('path'), passport = require('passport'), mongoose = require('mongoose'), models = require('./models/models'), login = require('./utils/security/login');
+var express = require('express'), routes = require('./routes'), http = require('http'), path = require('path'), passport = require('passport'), mongoose = require('mongoose'), models = require('./models/models'), login = require('./utils/security/login');
 
 var app = express();
 
@@ -25,7 +25,7 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.use('/users', user);
+require('./routes/user').addRoutes(app);
 
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));

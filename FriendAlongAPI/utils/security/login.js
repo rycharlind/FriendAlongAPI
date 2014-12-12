@@ -14,6 +14,8 @@ exports.init = function(models, app, express, passport, secret) {
 	});
 
 	passport.use('signup', new LocalStrategy({
+		usernameField: 'email',
+	    passwordField: 'password',
 		passReqToCallback : true
 	}, function(req, username, password, done) {
 		// if there is no user with that email
