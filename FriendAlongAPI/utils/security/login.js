@@ -1,4 +1,4 @@
-var encryption = require('./encryption'), LocalStrategy = require('passport-local').Strategy, mongoose = require('mongoose');
+var encryption = require('./encryption'), LocalStrategy = require('passport-local').Strategy;
 
 exports.init = function(models, app, express, passport, secret) {
 	app.configure(function() {
@@ -13,9 +13,34 @@ exports.init = function(models, app, express, passport, secret) {
 		app.use(app.router);
 	});
 
+	passport.use('login', new LocalStrategy({
+		usernameField : 'email',
+		passwordField : 'password',
+	}, function(username, password, done) {
+		console.log("hello");
+		models.User.findOne({
+			username : username
+		}, function(err, user) {
+			if (err) {
+				return done(err);
+			}
+			if (!user) {
+				return done(null, false, {
+					message : 'Incorrect username.'
+				});
+			}
+			if (user.password != encryption.encrypt(password)){
+				return done(null, false, {
+					message : 'Incorrect password.'
+				});
+			}
+			return done(null, user);
+		});
+	}));
+/*
 	passport.use('signup', new LocalStrategy({
-		usernameField: 'email',
-	    passwordField: 'password',
+		usernameField : 'email',
+		passwordField : 'password',
 		passReqToCallback : true
 	}, function(req, username, password, done) {
 		// if there is no user with that email
@@ -34,9 +59,9 @@ exports.init = function(models, app, express, passport, secret) {
 				return console.error(err);
 			}
 		});
-		return done(null,newUser);
+		return done(null, newUser);
 	}));
-
+*/
 	passport.serializeUser(function(user, done) {
 		done(null, user.id);
 	});
@@ -49,8 +74,8 @@ exports.init = function(models, app, express, passport, secret) {
 };
 
 exports.isAuthenticated = function(req, res, next) {
-	if (req.isAuthenticated()){
+	if (req.isAuthenticated()) {
 		return next();
 	}
-	res.redirect('/');
+	res.redirect('/login');
 };

@@ -25,15 +25,21 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', routes.index);
-require('./routes/user').addRoutes(app);
+require('./routes/user').addRoutes(app,login,models);
 
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));
 });
 
-/* Handle Registration POST */
+app.post('/login', passport.authenticate('login', {
+	successRedirect : '/users/hello',
+	failureRedirect : '/login',
+	failureFlash : false
+}));
+
+/* Handle Registration POST 
 app.post('/signup', passport.authenticate('signup', {
 	successRedirect : '/users/hello',
 	failureRedirect : '/signup',
 	failureFlash : false
-}));
+}));*/
