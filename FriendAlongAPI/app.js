@@ -42,10 +42,20 @@ app.post('/login', passport.authenticate('login', {
 	failureFlash : false
 }));
 
+app.get('/logout', login.isAuthenticated, function(request, response) {
+	request.logout();
+	response.redirect('/');
+});
+
 app.get('/profile', login.isAuthenticated, function(request, response) {
+	var name = request.user.firstname + ' ' + request.user.lastname;
 	response.render('profile', {
-		user: request.user.email
+		user: name
 	} );
+});
+
+app.get('/settings', login.isAuthenticated, function(request, response) {
+	response.render('settings', {} );
 });
 
 app.get('/chat', login.isAuthenticated, function(request, response) {
