@@ -62,7 +62,7 @@ nav.navbar.navbar-default(role='navigation')
 						img#nav-prof-pic(src='https://avatars0.githubusercontent.com/u/396811?v=3&s=40', style='width:19px;height:19px')
 					ul.dropdown-menu(role='menu')
 						li
-							a(href='#') 
+							a(href='/profile') 
 								i.fa.fa-user
 								span  Profile
 						li
@@ -75,14 +75,14 @@ nav.navbar.navbar-default(role='navigation')
 								i.fa.fa-sign-out
 								span  Logout
 				li
-					a 
-						i.fa.fa-home.fa-lg
+					a(href='/') 
+						i.fa.fa-home.fa-lg(style='color:#5A2F1B')
 				li.dropdown
 					a.dropdown-toggle(data-toggle='dropdown', role='button')
-						i.fa.fa-weixin.fa-lg
+						i.fa.fa-weixin.fa-lg(style='color:#51A3C9')
 					ul.dropdown-menu(role='menu')
 						li(style='text-align:center')
-							a(href='#') View All
+							a(href='/chat') View All
 						li.divider
 						+messageRow('http://k3.okccdn.com/php/load_okc_image.php/images/120x120/120x120/0x0/0x0/2/8195838067050674575.webp?v=2', 'Tesla', 'You better watch out with the "you should message me if" section.', 'Today at 12:08 PM')
 						+messageRow('http://k2.okccdn.com/php/load_okc_image.php/images/60x60/60x60/0x0/640x640/2/13396249506501603413.webp?v=2', 'Megan', 'Hey!  How are you?', 'Yesterday at 3:12 PM')
@@ -90,14 +90,15 @@ nav.navbar.navbar-default(role='navigation')
 						+messageRow('http://k2.okccdn.com/php/load_okc_image.php/images/60x60/60x60/52x0/566x513/2/1477023604442881454.webp?v=2', 'Jina', 'Whats good in the hood?', 'Nov 7 at 8:09 PM')
 				li.dropdown
 					a.dropdown-toggle(data-toggle='dropdown', role='button')
-						i.fa.fa-globe.fa-lg
+						i.fa.fa-globe.fa-lg(style='color:#238341')
 					ul.dropdown-menu(role='menu')
 						li(style='text-align:center')
-							a(href='#') View All
+							a(href='/notifications') View All
 						li.divider
 						+notificationEventRow('http://k3.okccdn.com/php/load_okc_image.php/images/120x120/120x120/0x0/0x0/2/8195838067050674575.webp?v=2', 'Tesla signed up for your event Golf at Stone Wolf Golf Club')
 						+notificationEventRow('http://k2.okccdn.com/php/load_okc_image.php/images/60x60/60x60/0x0/640x640/2/13396249506501603413.webp?v=2', 'Anna signed up for your event Sand Volleyball at SIUE Volleyball Courts East')
 						+notificationEventRow('http://k1.okccdn.com/php/load_okc_image.php/images/60x60/60x60/0x0/1500x1500/2/778512598807690730.webp?v=2', 'Megan liked your event Drinks at Ball Park Village')
 						+notificationEventRow('http://k2.okccdn.com/php/load_okc_image.php/images/60x60/60x60/52x0/566x513/2/1477023604442881454.webp?v=2', 'Jina is following you')
+					
 						
 					

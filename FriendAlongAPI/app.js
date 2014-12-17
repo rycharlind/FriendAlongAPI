@@ -42,13 +42,16 @@ app.post('/login', passport.authenticate('login', {
 	failureFlash : false
 }));
 
+app.get('/profile', login.isAuthenticated, function(request, response) {
+	response.render('profile', {
+		user: request.user.email
+	} );
+});
+
 app.get('/chat', login.isAuthenticated, function(request, response) {
 	response.render('chat', {} );
 });
 
-/* Handle Registration POST 
-app.post('/signup', passport.authenticate('signup', {
-	successRedirect : '/users/hello',
-	failureRedirect : '/signup',
-	failureFlash : false
-}));*/
+app.get('/notifications', login.isAuthenticated, function(request, response) {
+	response.render('notifications', {} );
+});
