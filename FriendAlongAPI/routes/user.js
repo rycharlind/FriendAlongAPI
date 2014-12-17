@@ -1,11 +1,12 @@
 var encryption = require('../utils/security/encryption');
 
 exports.addRoutes = function(app,login,models) {
+	
 	app.get('/signup', function(request, response) {
 		response.render('register', {});
 	});
 	
-	app.post('/signup', function(request,response){
+	app.post('/signup', function(request,response) {
 		var newUser = new models.User();
 		// set the user's local credentials
 		newUser.username = request.param('email');

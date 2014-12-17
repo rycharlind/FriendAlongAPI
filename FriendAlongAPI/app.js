@@ -24,7 +24,12 @@ if ('development' === app.get('env')) {
 	app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+//app.get('/', routes.index);
+
+app.get('/', login.isAuthenticated, function(request, response) {
+	response.render('home', {} );
+});
+
 require('./routes/user').addRoutes(app,login,models);
 
 http.createServer(app).listen(app.get('port'), function() {
@@ -32,10 +37,14 @@ http.createServer(app).listen(app.get('port'), function() {
 });
 
 app.post('/login', passport.authenticate('login', {
-	successRedirect : '/users/hello',
+	successRedirect : '/',
 	failureRedirect : '/login',
 	failureFlash : false
 }));
+
+app.get('/chat', login.isAuthenticated, function(request, response) {
+	response.render('chat', {} );
+});
 
 /* Handle Registration POST 
 app.post('/signup', passport.authenticate('signup', {

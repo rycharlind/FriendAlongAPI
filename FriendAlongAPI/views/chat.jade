@@ -13,11 +13,14 @@ block content
 				+chatTableRow('http://k1.okccdn.com/php/load_okc_image.php/images/60x60/60x60/0x0/1500x1500/2/778512598807690730.webp?v=2', 'Anna', 'Want to get a drink?')
 				+chatTableRow('http://k2.okccdn.com/php/load_okc_image.php/images/60x60/60x60/52x0/566x513/2/1477023604442881454.webp?v=2', 'Jina', 'Chillin')
 		div.col-md-8
+			h2 Tesla
 			table.table.table-striped
 				+messageTableRow('http://k3.okccdn.com/php/load_okc_image.php/images/120x120/120x120/0x0/0x0/2/8195838067050674575.webp?v=2', 'Hello')
 				+messageTableRow('http://k2.okccdn.com/php/load_okc_image.php/images/60x60/60x60/0x0/960x960/2/5704777011920203695.webp?v=2', 'Hey! Hows it going?')
 				+messageTableRow('http://k3.okccdn.com/php/load_okc_image.php/images/120x120/120x120/0x0/0x0/2/8195838067050674575.webp?v=2', 'Good!  What are you up to tonight?')
 				+messageTableRow('http://k2.okccdn.com/php/load_okc_image.php/images/60x60/60x60/0x0/960x960/2/5704777011920203695.webp?v=2', 'Not too much.  Just hanging out.')
+	div.row
+		include ./footer.jade
 												
 mixin chatTableRow(pic, name, message)
 	tr
