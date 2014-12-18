@@ -18,6 +18,7 @@ var authentication = require('./config/passport')(passport);
 
 //Bootstrap application settings
 require('./config/express')(app, passport);
+app.set('views', __dirname + '/views');
 
 
 
