@@ -17,20 +17,31 @@ var isAuthenticated = function(req, res,next){
 //Bootstrap application settings
 require('./config/express')(app, passport);
 app.set('views', __dirname + '/views');
+app.configure(function() {
+	  app.use(express.static('public'));
+	  app.use(express.cookieParser());
+	  app.use(express.bodyParser());
+	  app.use(express.session({ secret: 'keyboard cat' }));
+	  app.use(passport.initialize());
+	  app.use(passport.session());
+	  app.use(app.router);
+	});
 
 //Bootstrap passport config
 var authentication = require('./config/passport')(passport);
 
 
-app.get('/', isAuthenticated, function(request, response) {
-	response.render('home', {} );
+http.createServer(app).listen(app.get('port'), function() {
+	console.log('Express server listening on port ' + app.get('port'));
 });
 
 require('./routes/user').addRoutes(app);
 
-http.createServer(app).listen(app.get('port'), function() {
-	console.log('Express server listening on port ' + app.get('port'));
+app.get('/', function(request, response) {
+	response.render('home', {} );
 });
+
+
 
 app.post('/login', passport.authenticate('login', {
 	successRedirect : '/',

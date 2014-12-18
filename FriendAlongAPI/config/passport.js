@@ -10,15 +10,15 @@ var local = require('./passport/local');
 
 module.exports = function (passport) {
   //serialize sessions
-  passport.serializeUser(function(user, done) {
-    done(null, user.id)
-  })
-  //deserialize sessions
-  passport.deserializeUser(function(id, done) {
-    User.load({ criteria: { _id: id } }, function (err, user) {
-      done(err, user)
-    })
-  })
+	passport.serializeUser(function(user, done) {
+		  done(null, user.id);
+		});
+
+		passport.deserializeUser(function(id, done) {
+		  User.findById(id, function(err, user) {
+		    done(err, user);
+		  });
+		});
 
   passport.use('login', local);
   //passport.use(google);
