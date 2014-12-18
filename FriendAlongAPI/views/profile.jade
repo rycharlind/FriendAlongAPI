@@ -4,5 +4,20 @@ block content
 	div.page-header 
 		h2 
 			i.fa.fa-user
-			span  #{user}
+			span  #{user.firstName} #{user.lastName}
+	div.row
+		form(method='post', action='/profile')
+			+inputSection('First Name', 'firstname', 'text', user.firstName)
+			+inputSection('Last Name', 'lastname', 'text', user.lastName)
+			+inputSection('Email', 'email', 'text', user.email)
+			.col-md-4
+				button.btn.btn-primary(type='submit') Update
+		
+		
 			
+
+mixin inputSection(label,name,type,value)
+	.col-md-3
+		.form-group
+			label=label
+			input.form-control(name=name,type=type,value=value)
