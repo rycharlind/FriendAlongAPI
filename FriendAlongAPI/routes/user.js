@@ -1,16 +1,33 @@
-var encryption = require('../utils/security/encryption');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
-exports.addRoutes = function(app,login,models) {
+
+var encrypt = function(text){
+	var cipher = crypto.createCipher(algorithm,password)
+	var crypted = cipher.update(text,'utf8','hex')
+	crypted += cipher.final('hex');
+	return crypted;
+}
+
+var isAuthenticated = function(req, res,next){
+	if (req.isAuthenticated()){
+		return next;
+	}
+	res.redirect('/login');
+}
+
+exports.addRoutes = function(app) {
+	
 	
 	app.get('/signup', function(request, response) {
 		response.render('register', {});
 	});
 	
 	app.post('/signup', function(request,response) {
-		var newUser = new models.User();
+		var newUser = new User();
 		// set the user's local credentials
 		newUser.username = request.param('email');
-		newUser.password = encryption.encrypt(request.param('password'));
+		newUser.password = encrypt(request.param('password'));
 		newUser.email = request.param('email');
 		newUser.firstName = request.param('firstName');
 		newUser.lastName = request.param('lastName');
@@ -27,7 +44,7 @@ exports.addRoutes = function(app,login,models) {
 		response.render('login', {});
 	});	
 	
-	app.get('/users/hello', login.isAuthenticated, function(request, response) {
+	app.get('/users/hello', isAuthenticated, function(request, response) {
 		response.send("hi");
 	});
 }
