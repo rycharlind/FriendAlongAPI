@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-
+var crypto = require('crypto');
 
 var encrypt = function(text){
-	var cipher = crypto.createCipher(algorithm,password)
+	var cipher = crypto.createCipher('aes-256-ctr','onthedl')
 	var crypted = cipher.update(text,'utf8','hex')
 	crypted += cipher.final('hex');
 	return crypted;

@@ -15,14 +15,15 @@ module.exports = function (app, passport) {
 	if ('development' === app.get('env')) {
 		app.use(express.errorHandler());
 	}
-	
-	app.use(express.static('public'));
-	app.use(express.cookieParser());
-	app.use(express.bodyParser());
-	app.use(express.session({
-		secret : 'makesurethisissupersecret'
-	}));
-	app.use(passport.initialize());
-	app.use(passport.session());
-	app.use(app.router);
+	app.configure(function() {
+		app.use(express.static('public'));
+		app.use(express.cookieParser());
+		app.use(express.bodyParser());
+		app.use(express.session({
+			secret : 'makesurethisissupersecret'
+		}));
+		app.use(passport.initialize());
+		app.use(passport.session());
+		app.use(app.router);
+	});
 }

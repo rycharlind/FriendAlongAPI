@@ -13,13 +13,13 @@ var isAuthenticated = function(req, res,next){
 	res.redirect('/login');
 }
 
-//Bootstrap passport config
-var authentication = require('./config/passport')(passport);
 
 //Bootstrap application settings
 require('./config/express')(app, passport);
 app.set('views', __dirname + '/views');
 
+//Bootstrap passport config
+var authentication = require('./config/passport')(passport);
 
 
 app.get('/', isAuthenticated, function(request, response) {
