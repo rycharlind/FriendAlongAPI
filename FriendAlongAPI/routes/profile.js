@@ -1,9 +1,17 @@
-var encryption = require('../utils/security/encryption');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var crypto = require('crypto');
 
-exports.addRoutes = function(app,login,models) {
+var isAuthenticated = function(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/login');
+}
+
+module.exports = function(app) {
 	
-	app.get('/profile', login.isAuthenticated, function(request, response) {
-		//var name = request.user.firstname + ' ' + request.user.lastname;
+	app.get('/profile', isAuthenticated,  function(request, response) {
 		response.render('profile', {
 			user: request.user
 		} );
@@ -11,40 +19,29 @@ exports.addRoutes = function(app,login,models) {
 	
 	app.post('/profile', function(request,response) {
 		
-		models.User.findById(request.user.id, function(err, p) {
-			if (!p) {
+		User.findById(request.user.id, function(err, user) {
+			if (!user) {
 				return console.error(err);
 			} else {
 				console.log('Found user');
-				p.save(function(err) {
+				user.firstName = request.param('firstname');
+				user.lastName = request.param('lastname');
+				user.email = request.param('email');
+				user.save(function(err) {
 					if (err) {
 						console.log('error');
 					} else {
 						console.log('success');
+						request.user = user;
+						success = true;
 						response.render('profile', {
-							user: request.user
+							user: request.user,
+							message: 'Profile updated successfully!'
 						} );
 					}
 				});
 			}
 		});
-		
-		/*
-		var newUser = new models.User();
-		// set the user's local credentials
-		newUser.username = request.param('email');
-		newUser.password = encryption.encrypt(request.param('password'));
-		newUser.email = request.param('email');
-		newUser.firstName = request.param('firstName');
-		newUser.lastName = request.param('lastName');
-
-		newUser.save(function(err, item) {
-			if (err) {
-				return console.error(err);
-			}
-		});
-		response.redirect('/login');
-		*/
 	
 	});
 

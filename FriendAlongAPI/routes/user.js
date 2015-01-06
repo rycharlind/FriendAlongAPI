@@ -9,14 +9,29 @@ var encrypt = function(text){
 	return crypted;
 }
 
-var isAuthenticated = function(req, res,next){
-	if (req.isAuthenticated()){
-		return next;
+var isAuthenticated = function(req, res,next) {
+	if (req.isAuthenticated()) {
+		return next();
 	}
 	res.redirect('/login');
 }
 
-exports.addRoutes = function(app) {
+exports.addRoutes = function(app, passport) {
+	
+	app.get('/login', function(request, response) {
+		response.render('login', {});
+	});
+	
+	app.post('/login', passport.authenticate('login', {
+		successRedirect : '/profile',
+		failureRedirect : '/login',
+		failureFlash : false
+	}));
+
+	app.get('/logout', isAuthenticated, function(request, response) {
+		request.logout();
+		response.redirect('/');
+	});
 	
 	
 	app.get('/signup', function(request, response) {
@@ -38,13 +53,5 @@ exports.addRoutes = function(app) {
 			}
 		});
 		response.redirect('/login');
-	});
-
-	app.get('/login', function(request, response) {
-		response.render('login', {});
-	});	
-	
-	app.get('/users/hello', isAuthenticated, function(request, response) {
-		response.send("hi");
 	});
 }
